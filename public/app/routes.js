@@ -27,6 +27,11 @@ define(['ui-router'], function(){
                 controller: 'trvlCtrl',
                 url: '/traveler'
             })
+            .state('registration', {
+                templateUrl: 'app/modules/login/registration.html',
+                controller: 'regCtrl',
+                url: '/registration'
+            })
         $urlRouterProvider.otherwise('/login');
         $locationProvider.html5Mode({
             enabled: true,

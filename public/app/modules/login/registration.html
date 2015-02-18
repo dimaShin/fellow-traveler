@@ -1,0 +1,92 @@
+<div class="panel panel-primary login-form">
+    <div class="panel panel-heading">
+        <h1>Registration</h1>
+    </div>
+    <div class="panel panel-body">
+        <form name="registration">
+            <div class="form-group">
+                <label for="inputName">Name:</label>
+                <input id="inputName"
+                       type="text"
+                       class="form-control"
+                       placeholder="Name"
+                       name="name"
+                       ng-model="user.name"
+                       validate="name"
+                       required
+                >
+                <div class="alert alert-danger" role="alert" ng-if="registration.name.$dirty && registration.name.$error.required">
+                        This field is required!
+                </div>
+                <div class="alert alert-danger" role="alert" ng-if="registration.name.$dirty && registration.name.$error.namePattern">
+                        {{validation.name.rules.namePattern.text}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Email:</label>
+                <input id="inputEmail"
+                       type="text"
+                       class="form-control"
+                       placeholder="Email"
+                       name="email"
+                       ng-model="user.email"
+                       validate="email"
+                       required
+                >
+                <div class="alert alert-danger" role="alert" ng-if="registration.email.$dirty && registration.email.$error.required">
+                    This field is required!
+                </div>
+                <div class="alert alert-danger" role="alert" ng-if="registration.email.$dirty && registration.email.$error.emailPattern">
+                    {{validation.email.rules.emailPattern.text}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPwd">Password:</label>
+                <span class="pwd-level" set-pwd-level="user.pwd" ng-model="user.pwd"></span>
+                <input id="inputPwd"
+                       type="password"
+                       class="form-control"
+                       placeholder="Password"
+                       name="pwd"
+                       ng-model="user.pwd"
+                       validate="pwd"
+                       required
+
+                >
+                <div class="alert alert-danger" role="alert" ng-if="registration.pwd.$dirty && registration.pwd.$error.required">
+                    This field is required!
+                </div>
+                <div class="alert alert-danger" role="alert" ng-if="registration.pwd.$dirty && registration.pwd.$error.pwdPattern">
+                    {{validation.pwd.rules.pwdPattern.text}}
+                </div>
+                <div class="alert alert-danger" role="alert" ng-if="registration.pwd.$dirty && registration.pwd.$error.length">
+                    {{validation.pwd.rules.length.text}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="repeatPwd">Password:</label>
+                <input id="repeatPwd"
+                       type="password"
+                       class="form-control"
+                       placeholder="Repeat Password"
+                       name="rptPwd"
+                       ng-model="user.rptPwd"
+                       validate="rptPwd"
+                       required
+                >
+                <div class="alert alert-danger" role="alert" ng-if="registration.rptPwd.$dirty && registration.rptPwd.$error.required">
+                    This field is required!
+                </div>
+                <div class="alert alert-danger" role="alert" ng-if="registration.rptPwd.$dirty && registration.rptPwd.$error.pwdPattern">
+                    {{validation.rptPwd.rules.pwdPattern.text}}
+                </div>
+                <div class="alert alert-danger" role="alert" ng-if="registration.rptPwd.$dirty && registration.rptPwd.$error.pwdMatch">
+                    {{validation.rptPwd.rules.pwdMatch.text}}
+                </div>
+            </div>
+            <div class="lgn-btn-wrp col-xs-6">
+                <button type="button" class="btn btn-success" ng-click="register()">Done</button>
+            </div>
+        </form>
+    </div>
+</div>

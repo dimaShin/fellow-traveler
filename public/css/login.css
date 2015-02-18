@@ -7,3 +7,19 @@
 .lgn-link-wrp .row{
     margin-top: 0 !important;
 }
+.login-form .alert{
+    padding: 0 !important;
+    padding-left: 5px !important;
+}
+.pwd-level{
+    font-size: smaller;
+}
+.pwd-level.pwd-level-weak{
+    color: red;
+}
+.pwd-level.pwd-level-medium{
+    color: orange;
+}
+.pwd-level.pwd-level-strong{
+    color: green;
+}

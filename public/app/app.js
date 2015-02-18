@@ -3,7 +3,7 @@
  */
 define(['modules', 'ui-router'], function(){
     console.log('app');
-    var App = angular.module('main', ['ui.router', 'driver', 'traveler']);
+    var App = angular.module('main', ['ui.router', 'driver', 'traveler', 'login']);
 
     return App;
 })
