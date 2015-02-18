@@ -1,0 +1,9 @@
+.login-form.panel{
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    margin-bottom: 0 !important;
+}
+.lgn-link-wrp .row{
+    margin-top: 0 !important;
+}
