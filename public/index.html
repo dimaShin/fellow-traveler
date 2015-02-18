@@ -2,37 +2,15 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Fellow Traveler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
     <link rel="stylesheet" href="vendor/css/bootstrap.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script type="text/javascript" data-main="app/init" src="vendor/require.js"></script>
 </head>
 <body>
-    <div class="container hidden">
-        <h1>Structural Directives</h1>
-        <h4 ng-if="showSubtitle">They modify the structure of the DOM</h4>
-        <input type="checkbox" ng-model="showSubtitle" />Show Subtitle
-        <h4>Quality</h4>
-        <div ng-switch on="quality">
-            <div ng-switch-when="good">
-                Episodes IV, V, VI
-            </div>
-            <div ng-switch-when="bad">
-                Episodes I, II, III
-            </div>
-        </div>
-        <input type="radio" name="quality" ng-model="quality" value="good">Good<br />
-        <input type="radio" name="quality" ng-model="quality" value="bad">Bad<br />
+    <div class="app-container">
+        <ui-view></ui-view>
     </div>
-    <div ng-controller="mainCtrl" class="container">
-        <my-transclude>
-            <div ng-repeat="item in items">{{item}}</div>
-        </my-transclude>
-    </div>
-
-
-
-
-
-
-<script type="text/javascript" data-main="app/init" src="vendor/require.js"></script>
 </body>
 </html>
