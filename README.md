@@ -1,2 +1,2 @@
 # fellow-traveler
-Service where drivers can find fellow travelers on their route
+Service where drivers can find fellow travelers
