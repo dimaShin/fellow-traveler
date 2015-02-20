@@ -1,1 +1,12 @@
-driver!
+<div class="drv-index">
+    <div class="panel panel-primary">
+        <div class="panel panel-heading">
+            Start your route here
+            <img src="/img/opts.png" ng-click="optsVisibility = !optsVisibility" class="opts-ico"/>
+        </div>
+        <div class="panel panel-body">
+            <map-container></map-container>
+            <div route-opts="driver" ng-if="optsVisibility"></div>
+        </div>
+    </div>
+</div>
