@@ -8,7 +8,10 @@ requirejs.config({
         jquery: '../vendor/jquery.min',
         async: 'require-async',
         googleMapsApi: 'https://maps.googleapis.com/maps/api/js?v=3&callback=isNaN&language=ru',
-        'ui-router': '../vendor/angular-ui-router'
+        'ui-router': '../vendor/angular-ui-router',
+        socketIO: 'https://cdn.socket.io/socket.io-1.3.4',
+        //'jCaret': '../vendor/jquery.caret.1.02',
+        //'jquery.1.8': '../vendor/jquery-1.8.3.min'
     },
     shim: {
         angular: {
@@ -20,14 +23,24 @@ requirejs.config({
         },
         'ui-router': {
             deps: ['angular']
-        }
+        },
+        jquery: {
+            exports: 'jQuery'
+        },
+        //jCaret: {
+        //    deps: ['jquery.1.8']
+        //}
     }
 })
 
-require(['app'], function(){
-    console.log('require');
-    require(['collector',  'bootstrap'], function(){
-        console.log('init');
-        angular.bootstrap(document.body, ['main']);
-    })
+
+require(['components',  'bootstrap'], function(){
+    angular.module('base').run(function($rootScope, $state, stateChangeSrv, $timeout, authSrv) {
+            $rootScope.$on('$stateChangeStart', stateChangeSrv.stateWatcher);
+        }
+    );
+    angular.bootstrap(document.body, ['base']);
 })
+
+
+

@@ -1,31 +1,35 @@
-<div class="panel panel-primary login-form">
+<div class="panel panel-primary auth-panel">
     <div class="panel panel-heading">
         <h1>LogIn</h1>
     </div>
     <div class="panel panel-body">
-        <form name="login">
+        <form name="loginForm">
             <div class="form-group">
                 <label for="inputName">Name / Email:</label>
-                <input id="inputName" type="text" class="form-control" placeholder="Name" name="name" ng-model="user.name">
+                <input id="inputName" type="text" class="form-control" placeholder="Name" name="name" ng-model="user.name" required>
             </div>
             <div class="form-group">
                 <label for="inputPwd">Password:</label>
-                <input id="inputPwd" type="password" class="form-control" placeholder="Password" name="pwd" ng-model="user.password">
+                <input id="inputPwd" type="password" class="form-control" placeholder="Password" name="pwd" ng-model="user.password" required>
+            </div>
+            <div class="alert alert-danger" role="alert" ng-if="loginForm.pwd.$error.loginError">
+                Wrong login / password pair
             </div>
             <div class="checkbox">
                 <label>
                     <input type="checkbox"> Save session
                 </label>
             </div>
+
             <div class="lgn-btn-wrp col-xs-6">
-                <button type="button" class="btn btn-success" ng-ckick="login()">Log In</button>
+                <button type="button" class="btn btn-success" ng-click="logIn()">Log In</button>
             </div>
             <div class="lgn-link-wrp col-xs-6">
                 <div class="row">
-                    <a href="javascript:;" ng-click="restorePwd()" class="pull-right">Forgot password?</a>
+                    <a href="javascript:;" ui-sref="restore" class="pull-right">Forgot password?</a>
                 </div>
                 <div class="row">
-                    <a href="/registration" ng-click="registration()" class="pull-right">Registration</a>
+                    <a href="javascript:;" ui-sref="registration" class="pull-right">Registration</a>
                 </div>
 
             </div>

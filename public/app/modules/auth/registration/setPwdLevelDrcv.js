@@ -2,7 +2,8 @@
  * Created by iashind on 18.02.15.
  */
 define([], function(){
-    angular.module('login').directive('setPwdLevel', function(){
+    console.log('setpwdD');
+    function setPwdLevel(){
         return {
             restrict: 'A',
             scope: {},
@@ -28,5 +29,6 @@ define([], function(){
                 });
             }
         }
-    })
+    }
+    return setPwdLevel;
 })

@@ -3,34 +3,48 @@
  */
 define(['ui-router'], function(){
     console.log('routes');
-    angular.module('main').config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+    angular.module('base').config(function($stateProvider, $urlRouterProvider, $locationProvider, socketSrvProvider) {
         function authentication(){
-
         }
         $stateProvider
             .state('login', {
-                templateUrl: 'app/modules/login/login.html',
+                templateUrl: 'app/modules/auth/login/login.html',
                 controller: 'loginCtrl',
                 url: '/login'
-            })
-            .state('secure', {
+            }).state('secure', {
                 abstract: true,
-                resolve: authentication
-            })
-            .state('secured.driver', {
-                templateUrl: 'app/modules/driver/drvIndex.html',
+                data: {
+                    secured: true
+                }
+            }).state('driver', {
+                data: {
+                    secure: true
+                },
+                templateUrl: 'app/modules/driver/index.html',
                 controller: 'drvCtrl',
                 url: '/driver'
-            })
-            .state('secured.traveler', {
-                templateUrl: 'app/modules/traveler/trvlIndex.html',
+            }).state('traveler', {
+                data: {
+                    secure: true
+                },
+                templateUrl: 'app/modules/traveler/index.html',
                 controller: 'trvlCtrl',
                 url: '/traveler'
-            })
-            .state('registration', {
-                templateUrl: 'app/modules/login/registration.html',
+            }).state('choice', {
+                data: {
+                    secure: true
+                },
+                templateUrl: 'app/modules/base/choice/choice.html',
+                controller: 'choiceCtrl',
+                url: '/choice'
+            }).state('registration', {
+                templateUrl: 'app/modules/auth/registration/registration.html',
                 controller: 'regCtrl',
                 url: '/registration'
+            }).state('confirm', {
+                templateUrl: 'app/modules/auth/confirm/confirm.html',
+                controller: 'confirmCtrl',
+                url: '/confirm'
             })
         $urlRouterProvider.otherwise('/login');
         $locationProvider.html5Mode({
