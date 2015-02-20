@@ -1,0 +1,23 @@
+<div class="panel panel-primary auth-panel">
+    <div class="panel panel-heading">
+        <h1>Confirm email</h1>
+    </div>
+    <div class="panel panel-body">
+        <div class="form-confirm-wrp">
+            <form name="confirm">
+                <div class="form-group">
+                    <span>Enter code from sms:</span><br/>
+                    <input type="text" class="sms-code" placeholder="sms code" name="code" ng-model="code"/><br/>
+                    <div class="alert alert-danger" role="alert" ng-if="confirm.code.$dirty && confirm.code.$error.valid">
+                        Invalid code!
+                    </div>
+                    <a href="javascript:;" ng-click="reSendMail()">Send again...</a><br/>
+                </div>
+
+                <button type="button" class="btn btn-success" ng-click="confirmCode(code)">Confirm</button>
+
+            </form>
+        </div>
+
+    </div>
+</div>
