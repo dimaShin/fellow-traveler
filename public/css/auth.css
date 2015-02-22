@@ -1,3 +1,6 @@
+.auth-panel.panel .panel-heading{
+    height: 15vh;
+}
 .auth-panel.panel{
     width: 100vw;
     height: 100vh;

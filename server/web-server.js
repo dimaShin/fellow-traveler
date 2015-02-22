@@ -125,7 +125,7 @@ io.on('connection', function(socket){
         }
     })
     socket.on('isLoginReq', function(){
-        var user = getUserBySocket(socket),
+        var user = getUserByKey(socket),
             sessid = user && user.login ? user.sessid: undefined;
 
         socket.emit('isLoginResp', sessid);

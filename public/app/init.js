@@ -4,7 +4,7 @@
 requirejs.config({
     paths: {
         angular: '../vendor/angular.min',
-        bootstrap: '../vendor/bootstrap.min',
+        'twitter-bootstrap': '../vendor/bootstrap.min',
         jquery: '../vendor/jquery.min',
         async: '../vendor/require-async',
         googleMapsApi: 'https://maps.googleapis.com/maps/api/js?v=3&callback=isNaN&language=ru',
@@ -22,7 +22,7 @@ requirejs.config({
             deps: ['jquery'],
             exports: 'angular'
         },
-        bootstrap: {
+        'twitter-bootstrap': {
             deps: ['jquery', '../vendor/underscore.min']
         },
         'ui-router': {
@@ -42,8 +42,8 @@ requirejs.config({
 })
 
 
-require(['components',  'bootstrap'], function(){
-    angular.module('base').run(function($rootScope, $state, stateChangeSrv, $timeout, authSrv) {
+require(['components',  'twitter-bootstrap'], function(){
+    angular.module('base').run(function($rootScope, stateChangeSrv) {
             $rootScope.$on('$stateChangeStart', stateChangeSrv.stateWatcher);
         }
     );

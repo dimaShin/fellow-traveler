@@ -2,7 +2,7 @@
  * Created by iashind on 19.02.15.
  */
 define([], function(){
-    function stateChangeDrcv($rootScope){
+    function stateChangeDrcv(){
         return {
             restrict: 'A',
             scope: true,

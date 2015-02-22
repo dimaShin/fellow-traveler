@@ -1,0 +1,39 @@
+.slide-panel-wrp {
+    position: absolute;
+    top:0;
+    z-index: 900;
+    width: 130px;
+    height: 100%;
+    color:#fff;
+    background:#455A64;
+    transition: all .25s ease-out;
+    display: none;
+}
+
+.slide-panel-right{
+    right: -130px;
+}
+
+.slide-panel-left{
+    left: -130px;
+}
+
+.slide-panel-right div.slide-lug{
+    left: -30px;
+    transform: rotate(-90deg);
+}
+
+.slide-panel-left div.slide-lug{
+    right: -30px;
+    transform: rotate(90deg);
+}
+
+.slide-panel-wrp div.slide-lug{
+    background:#455A64;
+    position: absolute;
+    top: 50%;
+    height: 80px;
+    padding: 8px;
+    margin-top: -75px;
+    border-radius: 8px;
+}

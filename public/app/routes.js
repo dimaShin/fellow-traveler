@@ -1,11 +1,9 @@
 /**
  * Created by iashind on 17.02.15.
  */
-define(['ui-router'], function(){
-    console.log('routes');
-    angular.module('base').config(function($stateProvider, $urlRouterProvider, $locationProvider, socketSrvProvider) {
-        function authentication(){
-        }
+define(['modules'], function(){
+
+    angular.module('base').config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
             .state('login', {
                 templateUrl: 'app/modules/auth/login/login.html',

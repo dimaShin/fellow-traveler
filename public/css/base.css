@@ -1,3 +1,6 @@
 .choice-opt{
     width: 120px;
 }
+.panel.panel-heading{
+    height: 70px;
+}
