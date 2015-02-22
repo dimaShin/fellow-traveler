@@ -12,12 +12,17 @@ define([], function(){
             compile: function(el, attr){
                 var side = attr.slidePanel,
                     header = attr.panelHeader,
-                    width = attr.panelWidth;
+                    width = attr.panelWidth,
+                    lug;
 
                 return {
+                    //ToDo: count el.height
                     pre: function preLink($scope, el, attr){
                         el.addClass('slide-panel-' + side);
-                        el.css('display', 'block');
+                        el.css({
+                            display: 'block',
+                            width: width
+                        }).css(side, -width);
                         $scope.header = header;
                     },
                     post: function link($scope, el, attr){

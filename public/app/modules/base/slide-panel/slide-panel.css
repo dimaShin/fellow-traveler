@@ -2,7 +2,7 @@
     position: absolute;
     top:0;
     z-index: 900;
-    width: 130px;
+    /*width: 130px;*/
     height: 100%;
     color:#fff;
     background:#455A64;
@@ -11,11 +11,11 @@
 }
 
 .slide-panel-right{
-    right: -130px;
+    /*right: -130px;*/
 }
 
 .slide-panel-left{
-    left: -130px;
+    /*left: -130px;*/
 }
 
 .slide-panel-right div.slide-lug{
