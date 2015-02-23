@@ -14,27 +14,13 @@ define(['modules'], function(){
                 data: {
                     secured: true
                 }
-            }).state('driver', {
+            }).state('map', {
                 data: {
                     secure: true
                 },
-                templateUrl: 'app/modules/driver/index.html',
-                controller: 'drvCtrl',
-                url: '/driver'
-            }).state('traveler', {
-                data: {
-                    secure: true
-                },
-                templateUrl: 'app/modules/traveler/index.html',
-                controller: 'trvlCtrl',
-                url: '/traveler'
-            }).state('choice', {
-                data: {
-                    secure: true
-                },
-                templateUrl: 'app/modules/base/choice/choice.html',
-                controller: 'choiceCtrl',
-                url: '/choice'
+                templateUrl: 'app/modules/base/map/map.html',
+                controller: 'mapCtrl',
+                url: '/map'
             }).state('registration', {
                 templateUrl: 'app/modules/auth/registration/registration.html',
                 controller: 'regCtrl',

@@ -11,7 +11,7 @@ define([], function(){
                     console.log('valid code. start login');
                     socketSrv.loginUser()
                         .done(function(){
-                            stateChangeSrv.go('choice');
+                            stateChangeSrv.go('map');
                         }).fail(function(){
                             console.log('login error');
                         })

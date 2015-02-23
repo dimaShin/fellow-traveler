@@ -3,7 +3,7 @@
  */
 define([], function(){
     console.log('loginCtrl');
-    function loginCtrl($scope, authSrv, $state, $rootScope, stateChangeSrv){
+    function loginCtrl($scope, authSrv, $state, stateChangeSrv){
         $scope.user = {};
         $scope.logIn = function(){
             console.log('user: ', $scope.user);
@@ -11,10 +11,10 @@ define([], function(){
             if($scope.loginForm.$invalid) return;
             authSrv.loginUser($scope.user).done(
                 function(){
-                    $state.go('choice', {},{
+                    $state.go('map', {},{
                         notify: false
                     }).then(function() {
-                        stateChangeSrv.go('choice');
+                        stateChangeSrv.go('map');
                     });
                 }
             ).fail(
