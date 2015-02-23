@@ -18,12 +18,12 @@
 }
 
 .slide-panel-right div.slide-lug{
-    left: -30px;
+    left: -25px;
     transform: rotate(-90deg);
 }
 
 .slide-panel-left div.slide-lug{
-    right: -30px;
+    right: -25px;
     transform: rotate(90deg);
 }
 
@@ -31,8 +31,9 @@
     background:#455A64;
     position: absolute;
     top: 50%;
-    height: 80px;
-    padding: 8px;
-    margin-top: -75px;
+    height: 30px;
+    width: auto;
+    padding: 3px 10px;
     border-radius: 8px;
+    transform-origin: 0 0;
 }
