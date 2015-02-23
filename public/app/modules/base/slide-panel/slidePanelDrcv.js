@@ -3,6 +3,14 @@
  */
 define([], function(){
 
+    function setAnimatedCss(el, css, animationOpts, time){
+        el.css('transition', animationOpts);
+        setTimeout(function(){
+            el.css('transition', 'initial');
+        }, time);
+        el.css(css);
+    }
+
     function slidePanel($swipe){
         return {
             restrict: 'AE',
@@ -29,13 +37,9 @@ define([], function(){
                         var lug = el.find('.slide-lug'),
                             originX, originSide;
                         lug.on('click.togglePanel', function(){
-                            el.css('transition', 'all .25s ease-out');
-                            setTimeout(function(){
-                                el.css('transition', 'initial');
-                            }, 250)
-                            el.css(side) === '0px'
-                                ? el.css(side, -width)
-                                : el.css(side, 0)
+                            var css = {};
+                            css[side] = el.css(side) === '0px' ? -width : 0;
+                            setAnimatedCss(el, css, 'all .25s ease-out', 250);
                         });
                         $swipe.bind(lug, {
                             start: function(evt){
@@ -60,12 +64,10 @@ define([], function(){
                                 var diff = evt.x - originX,
                                     absDiff = Math.abs(diff);
                                 if(absDiff > 10){
-                                    var swipeDirection = diff < 0 ? 'left' : 'right';
-                                    if(swipeDirection === side){
-                                        el.css(side, -el.width());
-                                    }else{
-                                        el.css(side, 0);
-                                    }
+                                    var swipeDirection = diff < 0 ? 'left' : 'right',
+                                        css = {};
+                                    css[side] = swipeDirection === side ? -el.width() : 0;
+                                    setAnimatedCss(el, css, 'all .100s ease-out', 100);
                                 }
                             }
                         })
