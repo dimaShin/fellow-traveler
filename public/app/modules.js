@@ -1,8 +1,8 @@
 /**
  * Created by iashind on 17.02.15.
  */
-define(['angular', 'ui-router', 'ngAnimate'], function(){
+define(['angular', 'ui-router', 'ngAnimate', 'ngTouch'], function(){
     console.log('modules');
     angular.module('auth', []);
-    angular.module('base', ['auth', 'ui.router', 'ngAnimate']);
+    angular.module('base', ['auth', 'ui.router', 'ngAnimate', 'ngTouch']);
 })
