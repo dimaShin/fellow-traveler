@@ -2,7 +2,6 @@
  * Created by iashind on 18.02.15.
  */
 define([
-    'depricated/slide-panel/slidePanelDrcv',
     'modules/base/socket/socketSrv',
     'modules/base/stateChange/stateChangeSrv',
     'modules/base/map/mapDrcv',
@@ -23,12 +22,11 @@ define([
     'modules/base/user-info/personal-info/personalInfoCtrl',
     'modules/base/user-info/auth-info/authInfoCtrl',
     'routes'],
-function(slidePanelDrcv, socketSrv, stateChangeSrv,
-         mapDrcv, routeOptsDrcv, regCtrl, loginCtrl,
-         mapCtrl, validateDrcv, setPwdLevelDrcv, phoneNumberDrcv,
-         authSrv, confirmCtrl, userInfoCtrl, newCtrl, driverCtrl,
-         travelerCtrl, btspDatepickerDrcv, personalInfoCtrl,
-         authInfoCtrl
+function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
+         regCtrl, loginCtrl, mapCtrl, validateDrcv, setPwdLevelDrcv,
+         phoneNumberDrcv, authSrv, confirmCtrl, userInfoCtrl,
+         newCtrl, driverCtrl, travelerCtrl, btspDatepickerDrcv,
+         personalInfoCtrl, authInfoCtrl
 ){
 
     console.log('injector!: ');
@@ -52,7 +50,7 @@ function(slidePanelDrcv, socketSrv, stateChangeSrv,
     angular.module('auth')  .directive('setPwdLevel',       setPwdLevelDrcv);
     angular.module('auth')  .directive('phoneNumber',       phoneNumberDrcv);
     angular.module('base')  .directive('mapContainer',      mapDrcv);
-    angular.module('base')  .directive('routeOpts',         routeOptsDrcv);
-    angular.module('base')  .directive('slidePanel',        slidePanelDrcv);
+    //angular.module('base')  .directive('routeOpts',         routeOptsDrcv);
+    //angular.module('base')  .directive('slidePanel',        slidePanelDrcv);
     angular.module('base')  .directive('btspDatepicker',    btspDatepickerDrcv);
 })
