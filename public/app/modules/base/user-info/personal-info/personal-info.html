@@ -1,6 +1,3 @@
-<a href="/map">
-    <span class="glyphicon glyphicon-off off-btn" aria-hidden="true"></span>
-</a>
 <form name="personals" class="personals-form">
     <img ng-src="{{user.avatarUrl}}" class="avatar-img" />
     <input type="file" name="avatar" ng-model="user.avatar" accept="image/gif, image/jpeg, image/png" />
@@ -38,12 +35,11 @@
         <input id="inputSkype" type="text" class="form-control" placeholder="Skype" name="skype" ng-model="user.skype" required>
     </div>
     <div class="form-group">
-            <label for="inputPhone">Phone:</label>
-            <input id="inputPhone" type="text" class="form-control" placeholder="phone" name="phone" ng-model="user.phone" required>
+        <label for="inputPhone">Phone:</label>
+        <input id="inputPhone" type="text" class="form-control" placeholder="phone" name="phone" ng-model="user.phone" required>
     </div>
     <div class="form-group">
-            <label for="inputAbout">About:</label>
-            <textarea id="inputAbout" class="form-control" name="about" ng-model="user.about"></textarea>
+        <label for="inputAbout">About:</label>
+        <textarea id="inputAbout" class="form-control" name="about" ng-model="user.about"></textarea>
     </div>
-
 </form>

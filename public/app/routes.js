@@ -22,14 +22,9 @@ define(['modules'], function(){
                 controller: 'driverCtrl',
                 url: '/driver'
             }).state('new.traveler', {
-        templateUrl: 'app/modules/base/new/traveler/traveler.html',
+                templateUrl: 'app/modules/base/new/traveler/traveler.html',
                 controller: 'travelerCtrl',
                 url: '/traveler'
-            }).state('secure', {
-                abstract: true,
-                data: {
-                    secured: true
-                }
             }).state('map', {
                 data: {
                     secure: true
@@ -45,13 +40,22 @@ define(['modules'], function(){
                 templateUrl: 'app/modules/auth/confirm/confirm.html',
                 controller: 'confirmCtrl',
                 url: '/confirm'
-            }).state('personals', {
-                templateUrl: 'app/modules/base/personals/user-personals.html',
-                controller: 'userPersonalsCtrl',
-                url: '/personals',
+            }).state('user-info', {
+                templateUrl: 'app/modules/base/user-info/user-info.html',
+                controller: 'userInfoCtrl',
+                url: '/user',
+                abstract: true,
                 data: {
                     secure: true
                 }
+            }).state('user-info.personal', {
+                templateUrl: 'app/modules/base/user-info/personal-info/personal-info.html',
+                controller: 'personalInfoCtrl',
+                url: '/personal'
+            }).state('user-info.auth', {
+                templateUrl: 'app/modules/base/user-info/auth-info/auth-info.html',
+                controller: 'authInfoCtrl',
+                url: '/auth'
             })
         $urlRouterProvider.otherwise('/login');
         $locationProvider.html5Mode({
