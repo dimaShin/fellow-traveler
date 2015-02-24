@@ -1,70 +1,77 @@
-<form name="routeData">
-    <div class="form-group">
-        <label for="inputStart">Start point:</label>
-        <div class="col-xs-11">
-           <input id="inputStart"
-                  type="text"
-                  class="form-control"
-                  placeholder="Start point address"
-                  name="start"
-                  ng-model="route.start"
-                  required
-           >
-        </div>
-        <div class="col-xs-1">
-            <a href="javascript:;" ng-click="pointOnMap(user.start)" class="pull-right">
-                <span class="glyphicon glyphicon-globe point-on-map-ico" aria-hidden="true"></span>
-            </a>
-        </div>
+<div class="container-fluid">
+    <div class="btn-wrp pull-right">
+        <button class="btn btn-success" ng-click="save()">Save</button>
+        <button class="btn btn-danger" ng-click="close()">Close</button>
     </div>
-    <div class="form-group">
-        <label for="inputEnd">End point:</label>
-        <div class="col-xs-11">
-           <input id="inputEnd"
-                  type="text"
-                  class="form-control"
-                  placeholder="End point address"
-                  name="end"
-                  ng-model="route.end"
-                  required
-           >
+</div>
+<div class="container-fluid">
+    <form name="routeData">
+        <div class="form-group">
+            <label for="inputStart">Start point:</label>
+            <div class="col-xs-11">
+                <input id="inputStart"
+                       type="text"
+                       class="form-control"
+                       placeholder="Start point address"
+                       name="start"
+                       ng-model="route.start"
+                       required
+                        >
+            </div>
+            <div class="col-xs-1">
+                <a href="javascript:;" ng-click="pointOnMap(user.start)" class="pull-right">
+                    <span class="glyphicon glyphicon-globe point-on-map-ico" aria-hidden="true"></span>
+                </a>
+            </div>
         </div>
-        <div class="col-xs-1">
-            <a href="javascript:;" ng-click="pointOnMap(user.end)" class="pull-right">
-                <span class="glyphicon glyphicon-globe point-on-map-ico" aria-hidden="true"></span>
-            </a>
+        <div class="form-group">
+            <label for="inputEnd">End point:</label>
+            <div class="col-xs-11">
+                <input id="inputEnd"
+                       type="text"
+                       class="form-control"
+                       placeholder="End point address"
+                       name="end"
+                       ng-model="route.end"
+                       required
+                        >
+            </div>
+            <div class="col-xs-1">
+                <a href="javascript:;" ng-click="pointOnMap(user.end)" class="pull-right">
+                    <span class="glyphicon glyphicon-globe point-on-map-ico" aria-hidden="true"></span>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="inputPrice">Price:</label>
+        <div class="form-group">
+            <label for="inputPrice">Price:</label>
             <input id="inputPrice"
                    type="text"
                    class="form-control"
                    placeholder="Price"
                    name="price"
                    ng-model="route.price"
-            >
-    </div>
-    <div class="form-group">
-        <label for="inputTime">Time:</label>
-        <div class='input-group date' btsp-datepicker>
-            <input type='text' class="form-control" id="inputTime"/>
-            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    >
         </div>
-    </div>
-    <div class="form-group">
-        <label for="inputAdds">Additional info:</label>
+        <div class="form-group">
+            <label for="inputTime">Time:</label>
+            <div class='input-group date' btsp-datepicker>
+                <input type='text' class="form-control" id="inputTime"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAdds">Additional info:</label>
             <textarea id="inputAdds"
-                   class="form-control"
-                   name="adds"
-                   ng-model="route.adds"
-            ></textarea>
-    </div>
-    <div class="form-group">
-        <label for="inputMap">Point on map:</label>
-        <div class="map-wrp sm-map" id="inputMap">
-            <div map-container zoom="16"></div>
+                      class="form-control"
+                      name="adds"
+                      ng-model="route.adds"
+                    ></textarea>
         </div>
-    </div>
-
-</form>
+        <div class="form-group">
+            <label for="inputMap">Point on map:</label>
+            <div class="map-wrp sm-map" id="inputMap">
+                <div map-container zoom="16"></div>
+            </div>
+        </div>
+    </form>
+</div>
