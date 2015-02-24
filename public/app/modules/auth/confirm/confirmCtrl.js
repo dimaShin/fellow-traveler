@@ -2,7 +2,7 @@
  * Created by iashind on 19.02.15.
  */
 define([], function(){
-    function confirmCtrl($scope, socketSrv, stateChangeSrv){
+    function confirmCtrl($scope, socketSrv, $state){
         $scope.code = ''
         $scope.confirmCode = function confirm(code){
             $scope.confirm.code.$setValidity('valid', true);
@@ -11,7 +11,7 @@ define([], function(){
                     console.log('valid code. start login');
                     socketSrv.loginUser()
                         .done(function(){
-                            stateChangeSrv.go('map');
+                            $state.go('map');
                         }).fail(function(){
                             console.log('login error');
                         })

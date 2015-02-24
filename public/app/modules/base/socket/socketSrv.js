@@ -73,6 +73,19 @@ define(['socketIO'], function(io){
                     }
                 })
                 return deferred.promise();
+            },
+            getUserPersonals: function getUser(){
+                var deferred = $.Deferred();
+                socket.removeAllListeners('userPersonalsResp');
+                socket.emit('userPersonalsReq', {});
+                socket.on('userPersonalsResp', function(personals){
+                    if(personals) {
+                        deferred.resolve(personals);
+                    } else{
+                        deferred.resolve({});
+                    }
+                });
+                return deferred.promise();
             }
         }
     }

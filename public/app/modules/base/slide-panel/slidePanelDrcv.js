@@ -14,24 +14,28 @@ define([], function(){
     function slidePanel($swipe){
         return {
             restrict: 'AE',
-            scope: true,
+            scope: {
+                lugIcoEl: '='
+            },
             transclude: true,
             templateUrl: 'app/modules/base/slide-panel/slide-panel.html',
             compile: function(el, attr){
                 var side = attr.slidePanel,
-                    header = attr.panelHeader,
-                    width = attr.panelWidth,
+                    icoClass = attr.panelIcoClass,
+                    width = $(window).width(),
                     lug;
 
                 return {
                     //ToDo: count el.height
                     pre: function preLink($scope, el){
+                        var lug = el.find('.slide-lug');
+
                         el.addClass('slide-panel-' + side);
                         el.css({
                             display: 'block',
                             width: width
                         }).css(side, -width);
-                        $scope.header = header;
+                        $scope.icoClass = icoClass;
                     },
                     post: function link($scope, el){
                         var lug = el.find('.slide-lug'),
@@ -39,7 +43,7 @@ define([], function(){
                         lug.on('click.togglePanel', function(){
                             var css = {};
                             css[side] = el.css(side) === '0px' ? -width : 0;
-                            setAnimatedCss(el, css, 'all .25s ease-out', 250);
+                            setAnimatedCss(el, css, 'all 200ms ease-in', 220);
                         });
                         $swipe.bind(lug, {
                             start: function(evt){
@@ -62,12 +66,16 @@ define([], function(){
                             },
                             end: function(evt){
                                 var diff = evt.x - originX,
-                                    absDiff = Math.abs(diff);
+                                    absDiff = Math.abs(diff),
+                                    swipeDirection = diff < 0 ? 'left' : 'right',
+                                    css = {};
+
                                 if(absDiff > 10){
-                                    var swipeDirection = diff < 0 ? 'left' : 'right',
-                                        css = {};
                                     css[side] = swipeDirection === side ? -el.width() : 0;
-                                    setAnimatedCss(el, css, 'all .100s ease-out', 100);
+                                    setAnimatedCss(el, css, 'all .1s ease-out', 100);
+                                }else{
+                                    css[side] = swipeDirection === side ? 0 : -el.width();
+                                    setAnimatedCss(el, css, 'all .1s ease-out', 100);
                                 }
                             }
                         })

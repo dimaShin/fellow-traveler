@@ -23,6 +23,26 @@ var DB = {
         })
     }
 }
+
+Object.defineProperty(Object.prototype, "extend", {
+    enumerable: false,
+    value: function(to, from) {
+        var propsFrom = Object.getOwnPropertyNames(from),
+            propsTo = Object.getOwnPropertyNames(to);
+        var dest = {};
+
+        propsFrom.forEach(function(name) {
+            var destination = Object.getOwnPropertyDescriptor(to, name);
+            Object.defineProperty(to, name, destination);
+        });
+        propsTo.forEach(function(name) {
+            var destination = Object.getOwnPropertyDescriptor(from, name);
+            Object.defineProperty(dest, name, destination);
+        });
+        return dest;
+    }
+});
+
 var users = {
     'dmitri_shin@list.ru' :{
         name: 'dima',
@@ -129,6 +149,19 @@ io.on('connection', function(socket){
             sessid = user && user.login ? user.sessid: undefined;
 
         socket.emit('isLoginResp', sessid);
+    })
+    socket.on('userPersonalsReq', function(){
+        var user = getUserByKey(socket),
+            personals = {};
+        if(user){
+            personals.email = user.email;
+            personals.phone = user.phone;
+            personals.email = user.email;
+        }
+        if(user.personals){
+            personals.extend(user.personals);
+        }
+        socket.emit('userPersonalsResp', personals);
     })
 
 })
