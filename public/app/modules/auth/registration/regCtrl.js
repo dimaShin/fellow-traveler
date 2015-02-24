@@ -3,7 +3,7 @@
  */
 define([], function(){
     console.log('reg ctrl');
-    function regCtrl($scope, socketSrv, stateChangeSrv){
+    function regCtrl($scope, socketSrv, $state){
         var patterns = {
             pwd: /^[\w,:!\.\-]*$/
         }
@@ -74,7 +74,7 @@ define([], function(){
                 .done(function(){
                     socketSrv.regUser($scope.user)
                         .done(function(){
-                            stateChangeSrv.go('confirm');
+                            $state.go('confirm');
                         }).fail(function(){
                             console.log('registration fail');
                         })

@@ -1,0 +1,49 @@
+<a href="/map">
+    <span class="glyphicon glyphicon-off off-btn" aria-hidden="true"></span>
+</a>
+<form name="personals" class="personals-form">
+    <img ng-src="{{user.avatarUrl}}" class="avatar-img" />
+    <input type="file" name="avatar" ng-model="user.avatar" accept="image/gif, image/jpeg, image/png" />
+    <div class="form-group">
+        <label for="inputName">Name:</label>
+        <input id="inputName" type="text" class="form-control" placeholder="Name" name="name" ng-model="user.name" required>
+    </div>
+    <div class="form-group">
+        <label for="inputSurname">Surname:</label>
+        <input id="inputSurname" type="text" class="form-control" placeholder="Surname" name="surname" ng-model="user.surname" required>
+    </div>
+    <div class="container-fluid">
+        <div class="col-xs-5 pull-left">
+            <div class="form-group">
+                <label for="inputAge">Age:</label>
+                <input id="inputAge" type="number" class="form-control" placeholder="Age" name="age" ng-model="user.age">
+            </div>
+        </div>
+        <div class="col-xs-5 pull-right">
+            <div class="form-group">
+                <label for="inputGender">Gender:</label>
+                <select id="inputGender" class="form-control" name="gender" ng-model="user.gender">
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail">Email:</label>
+        <input id="inputEmail" type="text" class="form-control" placeholder="Email" name="email" ng-model="user.email" required>
+    </div>
+    <div class="form-group">
+        <label for="inputSkype">Skype:</label>
+        <input id="inputSkype" type="text" class="form-control" placeholder="Skype" name="skype" ng-model="user.skype" required>
+    </div>
+    <div class="form-group">
+            <label for="inputPhone">Phone:</label>
+            <input id="inputPhone" type="text" class="form-control" placeholder="phone" name="phone" ng-model="user.phone" required>
+    </div>
+    <div class="form-group">
+            <label for="inputAbout">About:</label>
+            <textarea id="inputAbout" class="form-control" name="about" ng-model="user.about"></textarea>
+    </div>
+
+</form>

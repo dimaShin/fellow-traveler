@@ -1,0 +1,16 @@
+.avatar-img{
+    width: 128px;
+    height: 128px;
+    margin: 10px auto;
+    float: left;
+}
+.off-btn{
+    font-size: 28px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #428bca;
+}
+.personals-form{
+    padding: 15px;
+}
