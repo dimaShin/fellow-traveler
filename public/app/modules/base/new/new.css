@@ -1,0 +1,16 @@
+.child-view-wrp{
+    width: 100%;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    min-height: 80vh;
+}
+.point-on-map-ico{
+    font-size: 20px;
+}
+.map-wrp.sm-map{
+    height: 30vh;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
