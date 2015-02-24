@@ -9,7 +9,7 @@ define([], function(){
             scope: {
 
             },
-            templateUrl: 'app/modules/base/forms/user-personals.html',
+            templateUrl: 'app/modules/base/forms/user-info.html',
             link: function($scope, el, attr){
                 console.log('user personals');
             },
