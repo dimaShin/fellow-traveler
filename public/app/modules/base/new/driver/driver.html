@@ -6,48 +6,23 @@
 </div>
 <div class="container-fluid">
     <form name="routeData">
-        <div class="form-group">
-            <label for="inputStart">Start point:</label>
-            <div class="col-xs-11">
-                <input id="inputStart"
-                       type="text"
-                       class="form-control"
-                       placeholder="Start point address"
-                       name="start"
-                       ng-model="route.start"
-                       required
-                        >
-            </div>
-            <div class="col-xs-1">
-                <a href="javascript:;" ng-click="pointOnMap(user.start)" class="pull-right">
-                    <span class="glyphicon glyphicon-globe point-on-map-ico" aria-hidden="true"></span>
-                </a>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputEnd">End point:</label>
-            <div class="col-xs-11">
-                <input id="inputEnd"
-                       type="text"
-                       class="form-control"
-                       placeholder="End point address"
-                       name="end"
-                       ng-model="route.end"
-                       required
-                        >
-            </div>
-            <div class="col-xs-1">
-                <a href="javascript:;" ng-click="pointOnMap(user.end)" class="pull-right">
-                    <span class="glyphicon glyphicon-globe point-on-map-ico" aria-hidden="true"></span>
-                </a>
-            </div>
-        </div>
+        <div route-generator start="routeData.start" end="routeData.end" name="points"></div>
         <div class="form-group">
             <label for="inputTime">Time:</label>
             <div class='input-group date' btsp-datepicker>
                 <input type='text' class="form-control" id="inputTime"/>
                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
+        </div>
+        <div class="form-group">
+            <label for="inputRepetition">Repetition:</label>
+            <select id="inputRepetition" name="repetition" ng-model="route.repetition">
+                <option value="1" selected="selected">one-time</option>
+                <option value="2">every weekday(monday - friday)</option>
+                <option value="3">weekly(every Thursday)</option>
+                <option value="4">monthly(on day 24)</option>
+                <option value="5">yearly(on February 24)</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="inputAdds">Additional info:</label>
@@ -57,12 +32,5 @@
                       ng-model="route.adds"
                     ></textarea>
         </div>
-        <div class="form-group">
-            <label for="inputMap">Point on map:</label>
-            <div class="map-wrp sm-map" id="inputMap">
-                <div map-container zoom="16"></div>
-            </div>
-        </div>
-
     </form>
 </div>

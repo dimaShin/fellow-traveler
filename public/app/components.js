@@ -21,12 +21,13 @@ define([
     'modules/base/decorators/btspDatepickerDrcv',
     'modules/base/user-info/personal-info/personalInfoCtrl',
     'modules/base/user-info/auth-info/authInfoCtrl',
+    'modules/base/new/route-generator/routeGeneratorDrcv',
     'routes'],
 function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
          regCtrl, loginCtrl, mapCtrl, validateDrcv, setPwdLevelDrcv,
          phoneNumberDrcv, authSrv, confirmCtrl, userInfoCtrl,
          newCtrl, driverCtrl, travelerCtrl, btspDatepickerDrcv,
-         personalInfoCtrl, authInfoCtrl
+         personalInfoCtrl, authInfoCtrl, routeGeneratorDrcv
 ){
 
     console.log('injector!: ');
@@ -53,4 +54,5 @@ function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
     //angular.module('base')  .directive('routeOpts',         routeOptsDrcv);
     //angular.module('base')  .directive('slidePanel',        slidePanelDrcv);
     angular.module('base')  .directive('btspDatepicker',    btspDatepickerDrcv);
+    angular.module('base')  .directive('routeGenerator',    routeGeneratorDrcv);
 })
