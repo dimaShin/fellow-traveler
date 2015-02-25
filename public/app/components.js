@@ -51,8 +51,6 @@ function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
     angular.module('auth')  .directive('setPwdLevel',       setPwdLevelDrcv);
     angular.module('auth')  .directive('phoneNumber',       phoneNumberDrcv);
     angular.module('base')  .directive('mapContainer',      mapDrcv);
-    //angular.module('base')  .directive('routeOpts',         routeOptsDrcv);
-    //angular.module('base')  .directive('slidePanel',        slidePanelDrcv);
     angular.module('base')  .directive('btspDatepicker',    btspDatepickerDrcv);
     angular.module('base')  .directive('routeGenerator',    routeGeneratorDrcv);
 })

@@ -6,11 +6,11 @@
 </div>
 <div class="container-fluid">
     <form name="routeData">
-        <div route-generator start="routeData.start" end="routeData.end" name="points"></div>
+        <div route-generator route-data="routeData"></div>
         <div class="form-group">
             <label for="inputTime">Time:</label>
             <div class='input-group date' btsp-datepicker>
-                <input type='text' class="form-control" id="inputTime"/>
+                <input type='text' class="form-control" id="inputTime" name="time" ng-model="route.time"/>
                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
         </div>

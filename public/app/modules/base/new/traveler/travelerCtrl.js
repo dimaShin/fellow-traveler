@@ -4,7 +4,6 @@
 define([], function(){
     function travelerCtrl($scope){
         $scope.route = {}
-        window.traveler = $scope.route;
     }
 
     return travelerCtrl;
