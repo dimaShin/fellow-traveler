@@ -1,0 +1,20 @@
+<div class="form-group">
+    <label for="inputTime">Time:</label>
+    <div class='input-group date datepicker-input' btsp-datepicker on-change="onDateChange">
+        <input type='text' class="form-control" name="time" ng-model="route.time" id="inputTime"/>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    </div>
+    <div class="alert alert-danger" role="alert" ng-if="routeData.time.$dirty && routeData.time.$error.converting">
+        Sorry, I can't format such time string. Try to use calendar.
+    </div>
+</div>
+<div class="form-group">
+    <label for="inputRepetition">Repetition:</label>
+    <select id="inputRepetition" name="repetition" ng-model="route.repetition">
+        <option value="1">one-time</option>
+        <option value="2">every {{opts.allWeek}}</option>
+        <option value="3">weekly(every {{opts.weekly}})</option>
+        <option value="4">monthly(on day {{opts.monthly}})</option>
+        <option value="5">yearly(on {{opts.yearly}})</option>
+    </select>
+</div>
