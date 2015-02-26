@@ -2,8 +2,8 @@
     /*height: 100vh;*/
 /*}*/
 
-.ui-view-container {
-    position: relative;
+.view-wrp {
+    overflow-x: hidden;
 }
 
 [ui-view].ng-enter, [ui-view].ng-leave {
