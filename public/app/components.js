@@ -2,7 +2,6 @@
  * Created by iashind on 18.02.15.
  */
 define([
-    'depricated/slide-panel/slidePanelDrcv',
     'modules/base/socket/socketSrv',
     'modules/base/stateChange/stateChangeSrv',
     'modules/base/map/mapDrcv',
@@ -22,13 +21,16 @@ define([
     'modules/base/decorators/btspDatepickerDrcv',
     'modules/base/user-info/personal-info/personalInfoCtrl',
     'modules/base/user-info/auth-info/authInfoCtrl',
+    'modules/base/new/route-generator/directions/routeDirectionsD',
+    'modules/base/services/googleMapsApiS',
+    'modules/base/new/route-generator/timing/routeTimingD',
     'routes'],
-function(slidePanelDrcv, socketSrv, stateChangeSrv,
-         mapDrcv, routeOptsDrcv, regCtrl, loginCtrl,
-         mapCtrl, validateDrcv, setPwdLevelDrcv, phoneNumberDrcv,
-         authSrv, confirmCtrl, userInfoCtrl, newCtrl, driverCtrl,
-         travelerCtrl, btspDatepickerDrcv, personalInfoCtrl,
-         authInfoCtrl
+function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
+         regCtrl, loginCtrl, mapCtrl, validateDrcv, setPwdLevelDrcv,
+         phoneNumberDrcv, authSrv, confirmCtrl, userInfoCtrl,
+         newCtrl, driverCtrl, travelerCtrl, btspDatepickerDrcv,
+         personalInfoCtrl, authInfoCtrl, routeDirectionsD, gApi,
+         routeTimingD
 ){
 
     console.log('injector!: ');
@@ -36,6 +38,7 @@ function(slidePanelDrcv, socketSrv, stateChangeSrv,
     angular.module('base')  .factory('socketSrv',           socketSrv);
     angular.module('base')  .factory('stateChangeSrv',      stateChangeSrv);
     angular.module('auth')  .factory('authSrv',             authSrv);
+    angular.module('base')  .factory('gApi',                gApi);
 
     angular.module('auth')  .controller('regCtrl',          regCtrl);
     angular.module('auth')  .controller('loginCtrl',        loginCtrl);
@@ -52,7 +55,7 @@ function(slidePanelDrcv, socketSrv, stateChangeSrv,
     angular.module('auth')  .directive('setPwdLevel',       setPwdLevelDrcv);
     angular.module('auth')  .directive('phoneNumber',       phoneNumberDrcv);
     angular.module('base')  .directive('mapContainer',      mapDrcv);
-    angular.module('base')  .directive('routeOpts',         routeOptsDrcv);
-    angular.module('base')  .directive('slidePanel',        slidePanelDrcv);
     angular.module('base')  .directive('btspDatepicker',    btspDatepickerDrcv);
+    angular.module('base')  .directive('routeDirections',   routeDirectionsD);
+    angular.module('base')  .directive('routeTiming',       routeTimingD);
 })

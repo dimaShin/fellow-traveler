@@ -3,7 +3,7 @@
  */
 define([], function(){
     function travelerCtrl($scope){
-
+        $scope.route = {}
     }
 
     return travelerCtrl;

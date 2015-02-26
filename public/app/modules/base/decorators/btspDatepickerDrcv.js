@@ -5,13 +5,16 @@ define(['bootstrap-datepicker'], function(){
     function btspDatepicker(){
         return {
             restrict: 'A',
-            scope: true,
+            scope: {
+                onChange: '&'
+            },
             link: function link($scope, el, attr){
-                console.log('link function');
                 $(document).ready(function(){
                     el.datetimepicker({
-                        locale: 'ru'
-                    });
+                        locale: 'en',
+                        showTodayButton: true
+                    })
+                        .on('dp.change', $scope.onChange());
                 })
             },
             controller: function(){

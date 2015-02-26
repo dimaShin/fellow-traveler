@@ -3,7 +3,8 @@
  */
 define([], function(){
     function driverCtrl($scope){
-
+        console.log('driver ctrl: ', $scope);
+        $scope.route = {};
     }
 
     return driverCtrl;

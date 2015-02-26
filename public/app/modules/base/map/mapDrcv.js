@@ -2,30 +2,37 @@
  * Created by iashind on 20.02.15.
  */
 define(['async!googleMapsApi'], function(){
-    function mapDrcv(){
+    function mapDrcv(gApi){
         return {
             restrict: 'EA',
             scope: true,
-            replace: true,
-            link: function($scope, el, attr){
-
+            compile: function(el){
                 el.css({
-                    width:  el.parent().width(),
-                    height: el.parent().height()
-                })
-                var zoom = +attr.zoom || 12,
-                    map = new google.maps.Map(el[0], {
-                        center: new google.maps.LatLng('50.008410','36.239539'),
-                        disableDefaultUI: true,
-                        zoom: zoom,
-                        draggable: true,
-                        scrollwheel: true,
-                        zoomControl: true
-                    }
-                )
+                    width:  '100%',
+                    height: '100%'
+                });
+                return function($scope, el, attr){
+                    var zoom = +attr.zoom || 12, map,
+                        mapEl = document.createElement('div');
+
+                    $(mapEl).css({
+                        width: '100%',
+                        height: '100%'
+                    });
+                    el.append(mapEl);
+                    $scope.$parent.map = gApi.newMap(el, {
+                        id: attr['mapId'],
+                        zoom: zoom
+                    });
+
+                    map = $scope.$parent.map;
+                    google.maps.event.addListener(map, 'tilesloaded', function(){
+                        console.log('tiles loaded');
+                    })
+                }
             },
             controller: function($scope){
-                console.log('map: ', google);
+                console.log('map: ', $scope);
             }
         }
     }
