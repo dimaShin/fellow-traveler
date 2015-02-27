@@ -6,20 +6,21 @@
                class="form-control"
                placeholder="Start point address"
                name="start"
-               ng-model="geo.start"
+               ng-model="route.start"
                ng-model-options="{ updateOn: 'blur' }"
+               required
         >
         <div class="alert alert-danger" role="alert" ng-if="routeData.start.$dirty && routeData.start.$error.converting">
             Sorry, google doesn't know this address. Try to point it on map.
         </div>
     </div>
     <div class="col-xs-1">
-        <a href="javascript:;" ng-click="addMarker(geo.start)" class="pull-right">
+        <a href="javascript:;" ng-click="addMarker(route.start)" class="pull-right">
             <span class="glyphicon glyphicon-ok point-on-map-ico" aria-hidden="true"></span>
         </a>
     </div>
     <div class="col-xs-1">
-        <a href="javascript:;" ng-click="pointOnMap(geo, 'start')" class="pull-right">
+        <a href="javascript:;" ng-click="pointOnMap('start')" class="pull-right">
             <span class="glyphicon glyphicon-map-marker point-on-map-ico" aria-hidden="true"></span>
         </a>
     </div>
@@ -32,20 +33,21 @@
                class="form-control"
                placeholder="End point address"
                name="end"
-               ng-model="geo.end"
+               ng-model="route.end"
                ng-model-options="{ updateOn: 'blur' }"
+               required
         >
         <div class="alert alert-danger" role="alert" ng-if="routeData.end.$dirty && routeData.end.$error.converting">
             Sorry, google doesn't know this address. Try to point it on map.
         </div>
     </div>
     <div class="col-xs-1">
-        <a href="javascript:;" ng-click="addMarker(geo.end)" class="pull-right">
+        <a href="javascript:;" ng-click="addMarker(route.end)" class="pull-right">
             <span class="glyphicon glyphicon-ok point-on-map-ico" aria-hidden="true"></span>
         </a>
     </div>
     <div class="col-xs-1">
-        <a href="javascript:;" ng-click="pointOnMap(geo, 'end')" class="pull-right">
+        <a href="javascript:;" ng-click="pointOnMap('end')" class="pull-right">
             <span class="glyphicon glyphicon-map-marker point-on-map-ico" aria-hidden="true"></span>
         </a>
     </div>

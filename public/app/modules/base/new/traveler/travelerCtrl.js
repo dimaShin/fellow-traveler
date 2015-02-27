@@ -4,6 +4,9 @@
 define([], function(){
     function travelerCtrl($scope){
         $scope.route = {}
+        $scope.save = function(){
+            console.log('saving');
+        }
     }
 
     return travelerCtrl;

@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="btn-wrp pull-right">
-        <button class="btn btn-success" ng-click="save()">Save</button>
+        <button class="btn btn-success" ng-click="save()" ng-disabled="routeData.$invalid">Save</button>
         <button class="btn btn-danger" ng-click="close()">Close</button>
     </div>
 </div>

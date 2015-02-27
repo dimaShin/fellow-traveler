@@ -3,21 +3,19 @@
  */
 define([], function(){
     function routeDirectionsD(gApi){
+        var markers = [];
         return{
             restrict: 'A',
-            scope: {
-                routeData: '='
-            },
+            scope: true,
             templateUrl: 'app/modules/base/new/route-generator/directions/directions.html',
-            link: function($scope, el, attr){
+            link: function($scope, el){
                 var mapWrp = el.find('.map-wrp'),
                     initialMapSize = {
                         width: mapWrp.width(),
                         height: mapWrp.height()
-                    }, markers = [];
+                    };
 
-                $scope.pointOnMap = function point(geo, target){
-                    console.log('geo: ', geo, ' target: ', target);
+                $scope.pointOnMap = function point(target){
                     mapWrp.css({
                         position: 'absolute',
                         left: 0,
@@ -47,15 +45,15 @@ define([], function(){
                         $scope.map.setCenter(latLng);
                         $scope.$apply(
                             function(){
-                                geo[target] = latLng;
+                                $scope.route[target] = latLng;
                             }
                         );
 
 
                         gApi.createRoute({
                             map: $scope.map,
-                            origin: $scope.geo.start,
-                            destination: $scope.geo.end
+                            origin: $scope.route.start,
+                            destination: $scope.route.end
                         }).done(function(){
                             console.log('done!');
                             for(var i = 0; i < markers.length; i++){
@@ -67,16 +65,22 @@ define([], function(){
             },
             controller: function($scope, gApi){
                 $scope.map = {};
-                $scope.geo = {};
 
                 function formatter(ctx){
                     return function(value){
+                        console.log('formatter: ', value);
                         var model = this;
                         if(value && value.lat){
                             gApi.convert({latLng: value})
                                 .done(function(result){
                                     model.$viewValue = result[0].formatted_address;
                                     model.$render();
+                                    $scope.$apply(function(){
+
+                                        model.$setValidity('required', true);
+                                    })
+
+                                    //
                                 }).fail(function(status){
 
                                 })
@@ -85,16 +89,38 @@ define([], function(){
                         return value;
                     }.bind(ctx)
 
-                }
+                };
                 function parser(ctx){
                     return function(value){
-                        console.log('parser');
+                        value += ' Харьков';
+                        console.log('parser: ', value);
                         var model = this;
                         if(value){
                             model.$setValidity('converting', true);
                             gApi.convert({address: value})
                                 .done(function(result){
-                                    model.$modelValue = result[0].geometry.location;
+                                    $scope.$apply(function(){
+                                        $scope.route[model.$name] = result[0].geometry.location;
+                                        model.$setValidity('parse', true);
+                                    })
+                                    markers.push(gApi.addMarker({
+                                        map: $scope.map,
+                                        latLng: result[0].geometry.location,
+                                        title: model.$name,
+                                        animation: google.maps.Animation.DROP
+                                    }))
+                                    $scope.map.setCenter(result[0].geometry.location);
+                                    gApi.createRoute({
+                                        map: $scope.map,
+                                        origin: $scope.route.start,
+                                        destination: $scope.route.end
+                                    }).done(function(){
+                                        console.log('done!');
+                                        for(var i = 0; i < markers.length; i++){
+                                            markers[i].setMap(null);
+                                        }
+                                    })
+
                                 }).fail(function(status){
                                     console.log('status: ', model);
                                     $scope.$apply(function(){
@@ -106,31 +132,35 @@ define([], function(){
                         }
                         return value;
                     }.bind(ctx)
-                }
-                $scope.$watch(
-                    function($scope){
+                };
+
+                var parentScopeWaiter = $scope.$watch(
+                    function routeDataWaiting($scope){
                         return $scope.routeData.start
-                    }, function(value){
+                    },
+                    function(value){
                         if(value){
                             $scope.routeData.start.$parsers.push(parser($scope.routeData.start));
                             $scope.routeData.end.$parsers.push(parser($scope.routeData.end));
                             $scope.routeData.start.$formatters.push(formatter($scope.routeData.start));
                             $scope.routeData.end.$formatters.push(formatter($scope.routeData.end));
+                            parentScopeWaiter();
                         }
                     }
                 )
                 $scope.addMarker = function(){
                     gApi.createRoute({
                         map: $scope.map,
-                        origin: $scope.geo.start,
-                        destination: $scope.geo.end
+                        origin: $scope.route.start,
+                        destination: $scope.route.end
                     }).done(function(){
                         console.log('done!');
                         for(var i = 0; i < markers.length; i++){
                             markers[i].setMap(null);
                         }
-                    }).reject(function(status){
+                    }).fail(function(status){
                         if(status){
+                            console.log('route generating fail.') //ToDo validation alert
                         }
                     })
                 }

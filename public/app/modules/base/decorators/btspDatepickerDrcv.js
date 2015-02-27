@@ -11,8 +11,7 @@ define(['bootstrap-datepicker'], function(){
             link: function link($scope, el, attr){
                 $(document).ready(function(){
                     el.datetimepicker({
-                        locale: 'en',
-                        showTodayButton: true
+                        locale: 'en'
                     })
                         .on('dp.change', $scope.onChange());
                 })
