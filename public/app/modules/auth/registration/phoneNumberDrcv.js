@@ -6,27 +6,35 @@ define([], function(){
         function replaceNotDigits(value){
             return value.replace(/\D/g, '');
         }
+
+        function validateCodes(codes){
+            return function(value){
+                var code;
+                if(!value || value.length < 12) return true;
+                code = +value.substr(0, 5);
+                console.log('code : ', code);
+                return -1 !== codes.indexOf(code);
+            }
+        }
+
         function putSpecChars(value){
             var formatted = '+',
                 chars = {
-                    4: ' ',
-                    5: '(',
-                    8: ')',
-                    9: ' ',
-                    13: '-',
-                    16: '-'
-                };
+                    3: ' (',
+                    5: ') ',
+                    8: '-',
+                    10: '-'
+                }, i = 0;
 
             value += '';
-            for(var i=1; i <= 18; i++){
+            while(value.length){
                 if(chars[i]){
-                    formatted += chars[i];
-                }else if(value.length){
-                    formatted += value[0];
-                    value = value.substr(1);
+                    formatted += chars[i] + value[0];
                 }else{
-                    formatted += ' ';
+                    formatted += value[0];
                 }
+                value = value.substr(1);
+                i++;
             }
 
             return formatted;
@@ -37,27 +45,31 @@ define([], function(){
             scope: true,
             require: 'ngModel',
             link: function($scope, el, attr, ctrl){
-                var validCodes = attr['phoneNumber'].split(' ');
-                console.log('valid codes: ', validCodes);
-                console.log('ngModel: ', ctrl);
+                var validCodes = attr['phoneNumber'].split(' '),
+                    lastValue, lastCaretPos;
                 ctrl.$parsers.push(replaceNotDigits);
-                //el.on('focus', function(){
-                //    if(el.val() === ''){
-                //        el.val('+380 (  )    -  -')
-                //    }
-                //})
-                //el.on('input', function(e){
-                //    var numbers = replaceNotDigits(el.val()),
-                //        formattedVal = putSpecChars(numbers);
-                //    console.log('caret: ', el.caret().start);
-                //    el.val(formattedVal);
-                //    console.log(formattedVal);
-                //    console.log('event: ', e);
-                //});
-                //el.on('keydown', function(evt){
-                //    console.log('keyCode: ', evt.keyCode);
-                //    if(evt.keyCode === 8) 1
-                //})
+                ctrl.$validators['codesValidation'] = validateCodes(validCodes);
+                el.on('focus', function(){
+                    if(el.val() === ''){
+                        el.val('+')
+                    }
+                })
+                el.on('input', function(e){
+                    var lastLength = el.val().length,
+                        numbers = replaceNotDigits(el.val()),
+                        formattedVal = putSpecChars(numbers),
+                        newCharsCount = formattedVal.length - lastLength,
+                        inputLength;
+                    lastCaretPos = el[0].selectionEnd;
+                    inputLength = !!lastValue
+                        ? numbers.length - lastValue.length < 0
+                            ? 0 : numbers.length - lastValue.length
+                        : numbers.length;
+                    var caretPos = lastCaretPos + inputLength + newCharsCount;
+                    lastValue = numbers;
+                    el.val(formattedVal);
+                    el[0].setSelectionRange(caretPos, caretPos);
+                });
             }
         }
     }

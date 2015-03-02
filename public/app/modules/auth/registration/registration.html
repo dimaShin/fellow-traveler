@@ -97,13 +97,18 @@
                        ng-model="user.phone"
                        validate="phone"
                        required
-                       phone-number="063 093 050 066 067 099 098"
+                       phone-number="38063 38093 38050 3866 38067 38099 38098"
                 >
-                <div class="alert alert-danger" role="alert" ng-if="registration.phone.$dirty && registration.phone.$error.required">
-                    This field is required!
-                </div>
-                <div class="alert alert-danger" role="alert" ng-if="registration.phone.$dirty && registration.phone.$error.phonePattern">
-                    {{validation.phone.rules.phonePattern.text}}
+                <div class="alert alert-danger" role="alert" ng-if="registration.phone.$dirty && registration.phone.$invalid">
+                    <span ng-if="registration.phone.$error.required">
+                        This field is required!<br/>
+                    </span>
+                    <span ng-if="registration.phone.$error.phonePattern">
+                        {{validation.phone.rules.phonePattern.text}}<br/>
+                    </span>
+                    <span ng-if="registration.phone.$error.codesValidation">
+                        Not valid country / city code
+                    </span>
                 </div>
             </div>
             <div class="lgn-btn-wrp col-xs-6">
