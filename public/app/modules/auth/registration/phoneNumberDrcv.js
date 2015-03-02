@@ -51,15 +51,19 @@ define([], function(){
                 ctrl.$validators['codesValidation'] = validateCodes(validCodes);
                 el.on('focus', function(){
                     if(el.val() === ''){
-                        el.val('+')
+                        el.val('+');
+                        el[0].setSelectionRange(2, 2);
                     }
                 })
                 el.on('input', function(e){
-                    var lastLength = el.val().length,
-                        numbers = replaceNotDigits(el.val()),
-                        formattedVal = putSpecChars(numbers),
-                        newCharsCount = formattedVal.length - lastLength,
-                        inputLength;
+                    var lastLength, numbers, formattedVal, newCharsCount, inputLength;
+
+                    lastLength = el.val().length;
+                    numbers = replaceNotDigits(el.val());
+                    if(numbers.length > 12) numbers = numbers.substr(0, 12);
+                    formattedVal = putSpecChars(numbers);
+                    newCharsCount = formattedVal.length - lastLength;
+
                     lastCaretPos = el[0].selectionEnd;
                     inputLength = !!lastValue
                         ? numbers.length - lastValue.length < 0
