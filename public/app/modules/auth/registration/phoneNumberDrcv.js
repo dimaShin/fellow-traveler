@@ -7,16 +7,6 @@ define([], function(){
             return value.replace(/\D/g, '');
         }
 
-        function validateCodes(codes){
-            return function(value){
-                var code;
-                if(!value || value.length < 12) return true;
-                code = +value.substr(0, 5);
-                console.log('code : ', code);
-                return -1 !== codes.indexOf(code);
-            }
-        }
-
         function putSpecChars(value){
             var formatted = '+',
                 chars = {
@@ -45,10 +35,8 @@ define([], function(){
             scope: true,
             require: 'ngModel',
             link: function($scope, el, attr, ctrl){
-                var validCodes = attr['phoneNumber'].split(' '),
-                    lastValue, lastCaretPos;
+                var lastValue, lastCaretPos;
                 ctrl.$parsers.push(replaceNotDigits);
-                ctrl.$validators['codesValidation'] = validateCodes(validCodes);
                 el.on('focus', function(){
                     if(el.val() === ''){
                         el.val('+');

@@ -62,6 +62,14 @@ define([], function(){
                             return /^\d+$/.test(value)
                         },
                         text: 'Invalid phone number'
+                    },
+                    codesValidation: {
+                        rule: function(value){
+                            console.log('value: ', value);
+                            var codes = [38063, 38093, 38050, 3866, 38067, 38099, 38098];
+                            if(!value || value.length < 12) return true;
+                            return -1 !== codes.indexOf(+value.substr(0, 5));
+                        }
                     }
                 }
             }
