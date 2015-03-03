@@ -98,12 +98,14 @@
                        ng-model="user.phone"
                        validate="phone"
                        required
-                       phone-number
+                       phone-number="+dd (ddd) dd-dd-ddd"
                 >
                 <div class="mobile-operators">
                     <img src="img/life.png" mobile-codes="38063 38093" ng-model="user.phone"/>
                     <img src="img/kievstar.gif" mobile-codes="38099 38067 38098" ng-model="user.phone"/>
                     <img src="img/mts.png" mobile-codes="38066 38050" ng-model="user.phone"/>
+                    <img src="img/ua.png" mobile-codes="38" ng-model="user.phone"/>
+                    <img src="img/ch.png" mobile-codes="86" ng-model="user.phone"/>
                 </div>
                 <div class="alert alert-danger" role="alert" ng-if="registration.phone.$dirty && registration.phone.$invalid">
                     <span ng-if="registration.phone.$error.required">

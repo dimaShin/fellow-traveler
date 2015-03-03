@@ -36,6 +36,10 @@
     top: 26px;
     right: 2px;
 }
+.mobile-operators img{
+    width: 20px;
+    height: 20px;
+}
 .form-group{
     position: relative;
 }
