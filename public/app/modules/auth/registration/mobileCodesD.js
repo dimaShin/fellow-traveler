@@ -15,10 +15,12 @@ define([], function(){
 
                 el.on('click', function(){
                     var code = codes[index];
+                    $scope.dot = $scope;
                     if(!$scope.dot.model) $scope.dot.model = '';
-                    if($scope.dot.model.length > code.length){
+                    console.log('phone: ', $scope.dot.model, $scope.model)
+                    if($scope.dot.model.length > 5){
                         $scope.$apply(function(){
-                            $scope.dot.model = code + $scope.dot.model.substr(code.length);
+                            $scope.dot.model = code + $scope.dot.model.substr(5);
                         });
                     }else{
                         $scope.$apply(function(){
@@ -29,7 +31,7 @@ define([], function(){
                 })
             },
             controller: function($scope){
-                $scope.dot = $scope;
+
             }
         }
     }

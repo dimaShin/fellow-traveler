@@ -10,7 +10,7 @@ define([], function(){
             require: 'ngModel',
             link: function($scope, el, attr, ctrl){
                 var fieldName   = attr.validate,
-                    rules       = $scope.validation[fieldName].rules;
+                    rules       = $scope.validation[fieldName] ? $scope.validation[fieldName].rules : 0;
                 for(var i in rules){
                     ctrl.$validators[i] = rules[i].rule;
                 }
