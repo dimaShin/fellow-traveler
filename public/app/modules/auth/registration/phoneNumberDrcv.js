@@ -37,6 +37,15 @@ define([], function(){
             link: function($scope, el, attr, ctrl){
                 var lastValue, lastCaretPos;
                 ctrl.$parsers.push(replaceNotDigits);
+                ctrl.$formatters.push(function(value){
+                    console.log('formatter: ', value);
+                    if(value){
+                        value += '';
+                        value = replaceNotDigits(value);
+                        return putSpecChars(value);
+                    }
+
+                })
                 el.on('focus', function(){
                     if(el.val() === ''){
                         el.val('+');

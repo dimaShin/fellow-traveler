@@ -65,16 +65,18 @@ define([], function(){
                     },
                     codesValidation: {
                         rule: function(value){
-                            console.log('value: ', value);
-                            var codes = [38063, 38093, 38050, 3866, 38067, 38099, 38098];
+                            var codes = [38063, 38093, 38050, 38066, 38067, 38099, 38098];
                             if(!value || value.length < 12) return true;
+                            value += '';
                             return -1 !== codes.indexOf(+value.substr(0, 5));
                         }
                     }
                 }
             }
         }
-        $scope.user = {};
+        $scope.user = {
+            phone: 123
+        };
         $scope.register = function(){
             $scope.registration.email.$setValidity('unique', true);
             if(!$scope.registration.$valid) return;
@@ -92,7 +94,18 @@ define([], function(){
                     })
                 })
             console.log('user: ', $scope.user);
+        };
+        $scope.setMobileCode = function(value){
+            console.log('booo', arguments);
+            console.log('set code: ', value);
+            if(!$scope.user.phone) $scope.user.phone = '';
+            if($scope.user.phone && $scope.user.phone.length < 5){
+                $scope.user.phone = value;
+            }else{
+                $scope.user.phone = value + $scope.user.phone.substr(5);
+            }
         }
+        console.log($scope.setMobileCode)
     }
     return regCtrl;
 })

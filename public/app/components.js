@@ -24,13 +24,14 @@ define([
     'modules/base/new/route-generator/directions/routeDirectionsD',
     'modules/base/services/googleMapsApiS',
     'modules/base/new/route-generator/timing/routeTimingD',
+    'modules/auth/registration/mobileCodesD',
     'routes'],
 function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
          regCtrl, loginCtrl, mapCtrl, validateDrcv, setPwdLevelDrcv,
          phoneNumberDrcv, authSrv, confirmCtrl, userInfoCtrl,
          newCtrl, driverCtrl, travelerCtrl, btspDatepickerDrcv,
          personalInfoCtrl, authInfoCtrl, routeDirectionsD, gApi,
-         routeTimingD
+         routeTimingD, mobileCodesD
 ){
 
     console.log('injector!: ');
@@ -58,4 +59,5 @@ function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
     angular.module('base')  .directive('btspDatepicker',    btspDatepickerDrcv);
     angular.module('base')  .directive('routeDirections',   routeDirectionsD);
     angular.module('base')  .directive('routeTiming',       routeTimingD);
+    angular.module('auth')  .directive('mobileCodes',       mobileCodesD);
 })
