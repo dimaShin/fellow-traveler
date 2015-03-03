@@ -9,7 +9,7 @@ define([
     'modules/auth/registration/regCtrl',
     'modules/auth/login/loginCtrl',
     'modules/base/map/mapCtrl',
-    'modules/auth/registration/validateDrcv',
+    'modules/base/validation/validateDrcv',
     'modules/auth/registration/setPwdLevelDrcv',
     'modules/auth/registration/phoneNumberDrcv',
     'modules/auth/authSrv',
@@ -25,13 +25,15 @@ define([
     'modules/base/services/googleMapsApiS',
     'modules/base/new/route-generator/timing/routeTimingD',
     'modules/auth/registration/mobileCodesD',
+    'modules/base/validation/validationS',
+    'modules/base/validation/comparePwdD',
     'routes'],
 function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
          regCtrl, loginCtrl, mapCtrl, validateDrcv, setPwdLevelDrcv,
          phoneNumberDrcv, authSrv, confirmCtrl, userInfoCtrl,
          newCtrl, driverCtrl, travelerCtrl, btspDatepickerDrcv,
          personalInfoCtrl, authInfoCtrl, routeDirectionsD, gApi,
-         routeTimingD, mobileCodesD
+         routeTimingD, mobileCodesD, validationS, comparePwdD
 ){
 
     console.log('injector!: ');
@@ -40,6 +42,7 @@ function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
     angular.module('base')  .factory('stateChangeSrv',      stateChangeSrv);
     angular.module('auth')  .factory('authSrv',             authSrv);
     angular.module('base')  .factory('gApi',                gApi);
+    angular.module('base')  .factory('validationData',      validationS);
 
     angular.module('auth')  .controller('regCtrl',          regCtrl);
     angular.module('auth')  .controller('loginCtrl',        loginCtrl);
@@ -52,7 +55,7 @@ function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
     angular.module('base')  .controller('personalInfoCtrl', personalInfoCtrl);
     angular.module('base')  .controller('authInfoCtrl',     authInfoCtrl);
 
-    angular.module('auth')  .directive('validate',          validateDrcv);
+    angular.module('base')  .directive('validate',          validateDrcv);
     angular.module('auth')  .directive('setPwdLevel',       setPwdLevelDrcv);
     angular.module('auth')  .directive('phoneNumber',       phoneNumberDrcv);
     angular.module('base')  .directive('mapContainer',      mapDrcv);
@@ -60,4 +63,5 @@ function(socketSrv, stateChangeSrv, mapDrcv, routeOptsDrcv,
     angular.module('base')  .directive('routeDirections',   routeDirectionsD);
     angular.module('base')  .directive('routeTiming',       routeTimingD);
     angular.module('auth')  .directive('mobileCodes',       mobileCodesD);
+    angular.module('base')  .directive('comparePasswords',  comparePwdD);
 })
