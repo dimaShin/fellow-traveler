@@ -10,8 +10,13 @@
                ng-model-options="{ updateOn: 'blur' }"
                required
         >
-        <div class="alert alert-danger" role="alert" ng-if="routeData.start.$dirty && routeData.start.$error.converting">
-            Sorry, google doesn't know this address. Try to point it on map.
+        <div class="alert alert-danger" role="alert" ng-if="routeData.start.$dirty && routeData.start.$invalid">
+            <span ng-if="routeData.start.$error.stringToLat">
+                Sorry, google doesn't know this address. Try to point it on map.
+            </span>
+            <span ng-if="routeData.start.$error.latToString">
+                Sorry, google geo service failed. Try once more or type address into input field
+            </span>
         </div>
     </div>
     <div class="col-xs-1">
@@ -37,8 +42,13 @@
                ng-model-options="{ updateOn: 'blur' }"
                required
         >
-        <div class="alert alert-danger" role="alert" ng-if="routeData.end.$dirty && routeData.end.$error.converting">
-            Sorry, google doesn't know this address. Try to point it on map.
+        <div class="alert alert-danger" role="alert" ng-if="routeData.end.$dirty && routeData.end.$invalid">
+            <span ng-if="routeData.end.$error.stringToLat">
+                Sorry, google doesn't know this address. Try to point it on map.
+            </span>
+            <span ng-if="routeData.end.$error.latToString">
+                Sorry, google geo service failed. Try once more or type address into input field
+            </span>
         </div>
     </div>
     <div class="col-xs-1">

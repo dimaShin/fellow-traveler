@@ -4,3 +4,6 @@
 .panel.panel-heading{
     height: 70px;
 }
+.alert{
+    padding: 2px !important;
+}

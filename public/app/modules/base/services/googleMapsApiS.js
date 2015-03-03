@@ -66,6 +66,10 @@ define([], function(){
                     map: opts.map,
                     title: opts.title
                 });
+            },
+            resizeMap: function(mapWrp, css, map, container){
+                mapWrp.css(css).appendTo(container);
+                google.maps.event.trigger(map, "resize");
             }
         }
     }
