@@ -1,11 +1,16 @@
 <div class="form-group">
     <label for="inputTime">Time:</label>
     <div class='input-group date datepicker-input' btsp-datepicker on-change="onDateChange">
-        <input type='text' class="form-control" name="time" ng-model="route.time" id="inputTime"/>
+        <input type='text' class="form-control" name="time" ng-model="route.time" id="inputTime" required/>
         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
-    <div class="alert alert-danger" role="alert" ng-if="routeData.time.$dirty && routeData.time.$error.converting">
-        Sorry, I can't format such time string. Try to use calendar.
+    <div class="alert alert-danger" role="alert" ng-if="routeData.time.$dirty && routeData.time.$invalid">
+        <span ng-if="routeData.time.$error.converting">
+            Sorry, I can't format such time string. Try to use calendar.
+        </span>
+        <span ng-if="routeData.time.$error.required">
+            This field is required!
+        </span>
     </div>
 </div>
 <div class="form-group">
