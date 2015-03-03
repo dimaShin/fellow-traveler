@@ -56,9 +56,15 @@ define([], function(){
                         codesValidation: {
                             rule: function(value){
                                 var codes = [38063, 38093, 38050, 38066, 38067, 38099, 38098];
-                                if(!value || value.length < 12) return true;
+
                                 value += '';
-                                return -1 !== codes.indexOf(+value.substr(0, 5));
+                                for(var i = 0; i < codes.length; i++){
+                                    if(!value || value.length < codes[i].length) return true;
+                                    if(-1 !== codes.indexOf(+value.substr(0, codes[i].length))){
+                                        return true;
+                                    }
+                                }
+                                return false;
                             }
                         }
                     }
