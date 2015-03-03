@@ -9,9 +9,7 @@ define([], function(){
             scope: {
                 model: '=ngModel'
             },
-            require: '^form',
-            link: function($scope, el, attr, ctrl){
-                console.log('controller: ', ctrl);
+            link: function($scope, el, attr){
                 var index = 0,
                     codes = attr['mobileCodes'].split(' ');
 
