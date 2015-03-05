@@ -3,24 +3,17 @@
  */
 define([], function(){
     function confirmCtrl($scope, socketSrv, $state){
-        $scope.code = ''
+        $scope.code = '';
         $scope.confirmCode = function confirm(code){
             $scope.confirm.code.$setValidity('valid', true);
             socketSrv.checkSmsCode(code)
                 .done(function(){
                     console.log('valid code. start login');
-                    socketSrv.loginUser()
-                        .done(function(){
-                            $state.go('map');
-                        }).fail(function(){
-                            console.log('login error');
-                        })
-
+                    $state.go('map');
                 }).fail(function(){
                     $scope.$apply(function(){
                         $scope.confirm.code.$setValidity('valid', false);
                     })
-
                 })
             console.log('confirm code: ', code);
         }

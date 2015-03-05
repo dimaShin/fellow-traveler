@@ -4,6 +4,27 @@
 define([], function(){
     function routeDirectionsD(gApi){
         var markers = {};
+        function createRoute($scope){
+            if($scope.route.end && $scope.route.start){
+                $scope.routeData.$setValidity('routing', true);
+                gApi.createRoute({
+                    map: $scope.map,
+                    origin: new google.maps.LatLng($scope.route.start.lat , $scope.route.start.lng),
+                    destination: new google.maps.LatLng($scope.route.end.lat , $scope.route.end.lng)
+                }).done(function(){
+                    console.log('done!');
+                    markers.start.setMap(null);
+                    markers.end.setMap(null);
+                }).fail(function(status){
+                    console.log('fail to create route');
+                    $scope.$apply(function(){
+                        $scope.routeData.$setValidity('routing', false);
+                    })
+
+                })
+            }
+        }
+
         return{
             restrict: 'A',
             scope: true,
@@ -24,8 +45,7 @@ define([], function(){
                         height: '100%',
                         'z-index': 500
                     }, $scope.map, document.body);
-                    $(document.body).on('keydown.escListener', function(evt){
-                        console.log('keycode: ', evt.keyCode);
+                    $(document.body).off('.escListener').on('keydown.escListener', function(evt){
                         if(evt.keyCode === 27){
                             gApi.resizeMap(mapWrp, {
                                 position: 'initial',
@@ -54,25 +74,14 @@ define([], function(){
                             animation: google.maps.Animation.DROP
                         })
                         $scope.map.setCenter(latLng);
-                        $scope.$apply(
-                            function(){
-                                $scope.route[target] = {
-                                    lat: latLng.lat(),
-                                    lng: latLng.lng()
-                                };
-                                console.log('location: ', $scope.route[target])
-                            }
-                        );
+                        $scope.$apply(function(){
+                            $scope.route[target] = {
+                                lat: latLng.lat(),
+                                lng: latLng.lng()
+                            };
+                        });
 
-                        gApi.createRoute({
-                            map: $scope.map,
-                            origin: new google.maps.LatLng($scope.route.start.lat , $scope.route.start.lng),
-                            destination: new google.maps.LatLng($scope.route.end.lat , $scope.route.end.lng)
-                        }).done(function(){
-                            console.log('done!');
-                            markers.start.setMap(null);
-                            markers.end.setMap(null);
-                        })
+                        createRoute($scope);
                     })
                 }
             },
@@ -81,7 +90,6 @@ define([], function(){
 
                 function formatter(ctx){
                     return function(value){
-                        console.log('formatter: ', value);
                         var model = this;
                         model.$setValidity('latToString', true);
                         model.$setValidity('stringToLat', true);
@@ -94,11 +102,9 @@ define([], function(){
                                         model.$setValidity('required', true);
                                     })
                                 }).fail(function(status){
-
                                     $scope.$apply(function(){
                                         model.$setValidity('latToString', false);
                                     })
-                                    console.log('fail: ', status);
                                 })
                             return '';
                         }
@@ -106,6 +112,7 @@ define([], function(){
                     }.bind(ctx)
 
                 };
+
                 function parser(ctx){
                     return function(value){
                         //value += ' Харьков';
@@ -114,13 +121,13 @@ define([], function(){
                         if(value){
                             model.$setValidity('latToString', true);
                             model.$setValidity('stringToLat', true);
-                            gApi.convert({address: value}).done(function(result){
-                                $scope.$apply(function(){
+                            if(markers[model.$name]) markers[model.$name].setMap(null);
+                            gApi.convert({address: value}).done(function(result) {
+                                $scope.$apply(function () {
                                     $scope.route[model.$name] = result[0].geometry.location;
-                                    console.log('location: ', result[0].geometry.location)
                                     model.$setValidity('parse', true);
                                 })
-                                if(markers[model.$name]) markers[model.$name].setMap(null);
+
                                 markers[model.$name] = gApi.addMarker({
                                     map: $scope.map,
                                     latLng: result[0].geometry.location,
@@ -128,21 +135,12 @@ define([], function(){
                                     animation: google.maps.Animation.DROP
                                 })
                                 $scope.map.setCenter(result[0].geometry.location);
-                                gApi.createRoute({
-                                    map: $scope.map,
-                                    origin: new google.maps.LatLng($scope.route.start.lat , $scope.route.start.lng),
-                                    destination: new google.maps.LatLng($scope.route.end.lat , $scope.route.end.lng)
-                                }).done(function(){
-                                    console.log('done!');
-                                    markers.start.setMap(null);
-                                    markers.end.setMap(null);
+                                createRoute($scope);
+                            }).fail(function(){
+                                $scope.$apply(function(){
+                                    model.$setValidity('stringToLat', false);
                                 })
-                                }).fail(function(status){
-                                    console.log('status: ', model);
-                                    $scope.$apply(function(){
-                                        model.$setValidity('stringToLat', false);
-                                    })
-                                })
+                            });
                             return undefined;
                         }
                         return value;
@@ -164,22 +162,8 @@ define([], function(){
                     }
                 )
                 $scope.addMarker = function(){
-                    gApi.createRoute({
-                        map: $scope.map,
-                        origin: new google.maps.LatLng($scope.route.start.lat , $scope.route.start.lng),
-                        destination: new google.maps.LatLng($scope.route.end.lat , $scope.route.end.lng)
-                    }).done(function(){
-                        console.log('done!');
-                        for(var i = 0; i < markers.length; i++){
-                            markers[i].setMap(null);
-                        }
-                    }).fail(function(status){
-                        if(status){
-                            console.log('route generating fail.') //ToDo validation alert
-                        }
-                    })
+                    createRoute($scope);
                 }
-
             }
         }
     }

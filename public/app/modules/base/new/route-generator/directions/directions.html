@@ -63,7 +63,11 @@
     </div>
 </div>
 <div class="form-group">
+
     <label for="inputMap">Point on map:</label>
+    <div class="alert alert-danger" ng-if="routeData.$dirty && routeData.$error.hasOwnProperty('routing')">
+        Fail to create route. Try to clarify points
+    </div>
     <div class="map-wrp sm-map" id="inputMap">
         <div map-container zoom="13" map-id="routeMap"></div>
     </div>

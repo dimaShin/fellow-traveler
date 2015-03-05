@@ -39,9 +39,6 @@
                 <div class="alert alert-danger" role="alert" ng-if="registration.email.$dirty && registration.email.$error.emailPattern">
                     {{validation.email.rules.emailPattern.text}}
                 </div>
-                <div class="alert alert-danger" role="alert" ng-if="registration.email.$dirty && registration.email.$error.unique">
-                    User with such email already exists. Try to <a href="/restore">restore forgot password</a>
-                </div>
             </div>
             <div class="form-group">
                 <label for="inputPwd">Password:</label>
@@ -118,6 +115,9 @@
                         Not valid country / city code
                     </span>
                 </div>
+            </div>
+            <div class="alert alert-danger" role="alert" ng-if="registration.$dirty && registration.$error.hasOwnProperty('unique')">
+                    User with such email or phone number already exist. Try to <a href="/restore">RESTORE</a> forgotten password.
             </div>
             <div class="lgn-btn-wrp col-xs-6">
                 <button type="button" class="btn btn-success" ng-click="register()">Done</button>

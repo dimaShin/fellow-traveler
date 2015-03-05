@@ -3,26 +3,7 @@ var fs = require('fs');
 
 var app = require('http').createServer(handler);
 var io = require('socket.io')(app);
-var DB = {
-    usersPath: '../server/DB/users.fdb',
-    getUsers: function getUsers(){
-        fs.readFile(DB.usersPath, function(err, data){
-            console.log('open users file: ', err, data.toJSON());
-        })
-    },
-    addUser: function addUser(user){
-        fs.readFile(DB.usersPath, user, function(err, users){
-            users = users.toJSON();
-            console.log('json user: ', users);
-            users[user.email] = user;
-            console.log('add user: ', users);
-            fs.writeFile(DB.usersPath, users, function(err){
-                console.log('writeFile: ', err);
-            })
-
-        })
-    }
-}
+var DB = require('./db.js');
 
 Object.defineProperty(Object.prototype, "extend", {
     enumerable: false,
@@ -43,13 +24,7 @@ Object.defineProperty(Object.prototype, "extend", {
     }
 });
 
-var users = {
-    'dmitri_shin@list.ru' :{
-        name: 'dima',
-        pwd: '166823325',
-        email: 'dmitri_shin@list.ru'
-    }
-};
+var users = [];
 
 app.listen(80);
 
@@ -109,40 +84,49 @@ io.on('connection', function(socket){
         socket.emit('isUniqueResp', !(!!users[email]));
     })
     socket.on('regReq', function(user){
-        user.id = Math.ceil(Math.random() * 1000000);
-        user.socket = socket;
-        users[user.email] = user;
-        socket.emit('regResp', true);
+        DB.addUser(user).then(
+            function onSuccess(id){
+                console.log('added user id: ', id);
+                user.socket = socket;
+                user.id = id;
+                users.push(user);
+                socket.emit('regResp', true);
+            },
+            function onFail(err){
+                socket.emit('regResp', false);
+                console.log('reg fail: ', err);
+            }
+        )
     })
     socket.on('smsCodeReq', function(code){
-        socket.emit('smsCodeResp', code === '111111');
-    })
-    socket.on('loginReq', function(loginData){
-        var isValid, user;
-        if(loginData){
-            console.log('got login req: ', loginData);
-            if(-1 === loginData.name.indexOf('@')){
-                console.log('name - name');
-                user = getUserByKey('name', loginData.name);
-            }else{
-                console.log('name - email');
-                user = users[name];
-            }
-            if(user && user.pwd === loginData.password) {
-                console.log('valid pair')
-                isValid = true;
-            }else{
-                console.log('invalid pair');
-            }
-        }else{
+        var user;
+        if(code === '111111'){
+            socket.emit('smsCodeResp', true);
             user = getUserByKey('socket', socket);
-            if(user) isValid = true;
-        }
-        socket.emit('loginResp', isValid);
-        if(isValid) {
             user.login = true;
-            user.sessid = Math.ceil(Math.random() * 1000000);
+            user.sessid = Math.ceil(Math.random() * 1000000000);
         }
+    })
+
+    socket.on('loginReq', function(loginData){
+        DB.checkAuth(loginData.name, loginData.password).then(
+            function onSuccess(uId){
+                socket.emit('loginResp', uId);
+                console.log('uid: ', uId);
+                users.push({
+                    id: uId,
+                    login: true,
+                    sessid: Math.ceil(Math.random() * 1000000000)
+                })
+            },
+            function onFail(err){
+                if(err){
+                    console.log('auth error: ', err)
+                }else{
+                    socket.emit('loginResp', false);
+                }
+            }
+        )
     })
     socket.on('isLoginReq', function(){
         var user = getUserByKey(socket),

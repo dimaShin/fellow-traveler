@@ -7,21 +7,17 @@ define([], function(){
         $scope.validation = validationData.getData();
         $scope.user = {};
         $scope.register = function(){
-            $scope.registration.email.$setValidity('unique', true);
+            $scope.registration.$setValidity('unique', true);
             if(!$scope.registration.$valid) return;
-            socketSrv.uniqueEmail($scope.user.email)
+            socketSrv.regUser($scope.user)
                 .done(function(){
-                    socketSrv.regUser($scope.user)
-                        .done(function(){
-                            $state.go('confirm');
-                        }).fail(function(){
-                            console.log('registration fail');
-                        })
+                    $state.go('confirm');
                 }).fail(function(){
                     $scope.$apply(function(){
-                        $scope.registration.email.$setValidity('unique', false);
+                        $scope.registration.$setValidity('unique', false);
                     })
                 })
+
             console.log('user: ', $scope.user);
         };
     }

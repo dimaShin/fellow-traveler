@@ -13,7 +13,12 @@
                 <input id="inputPwd" type="password" class="form-control" placeholder="Password" name="pwd" ng-model="user.password" required>
             </div>
             <div class="alert alert-danger" role="alert" ng-if="loginForm.pwd.$error.loginError">
-                Wrong login / password pair
+                <span ng-if="loginForm.pwd.$error.loginError">
+                    Wrong login / password pair
+                </span>
+                <span ng-if="loginForm.pwd.$error.serverError">
+                    Sorry, our server is busy right now. Try once more later.
+                </span>
             </div>
             <div class="checkbox">
                 <label>
