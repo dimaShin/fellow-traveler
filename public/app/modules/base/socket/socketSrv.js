@@ -11,24 +11,31 @@ define(['socketIO'], function(io){
         return {
             //client: socket,
 
-            //regUser: function regUser(user){
-            //    var deferred = $.Deferred();
-            //    $http.get('/http').success(function(data, status, headers, config){
-            //        console.log()
-            //    }).error(function (data, status, headers, config){
-            //
-            //    })
-            //    socket.removeAllListeners('regResp');
-            //    socket.emit('regReq', user);
-            //    socket.on('regResp', function(resp){
-            //        if(resp){
-            //            deferred.resolve();
-            //        }else{
-            //            deferred.reject();
-            //        }
-            //    })
-            //    return deferred.promise();
-            //},
+            regUser: function regUser(user){
+                var deferred = $.Deferred();
+                $http.post('/jx-reg', user, {
+                    responseType: 'json'
+                }).success(function(data, status, headers, config) {
+                    if(data.length){
+                        deferred.resolve(data[0].id);
+                    }else{
+                        deferred.reject(null);
+                    }
+                }).error(function(data, status, headers, config) {
+                    deferred.reject(status);
+                    console.log('error: ', data, status, headers, config)
+                })
+                //socket.removeAllListeners('regResp');
+                //socket.emit('regReq', user);
+                //socket.on('regResp', function(resp){
+                //    if(resp){
+                //        deferred.resolve();
+                //    }else{
+                //        deferred.reject();
+                //    }
+                //})
+                return deferred.promise();
+            },
             //checkSmsCode: function checkSmsCode(code){
             //    var deferred = $.Deferred();
             //    socket.removeAllListeners('smsCodeResp');
