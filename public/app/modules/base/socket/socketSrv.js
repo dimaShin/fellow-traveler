@@ -45,7 +45,7 @@ define(['socketIO'], function(io){
             loginUser: function login(user){
                 var deferred = $.Deferred();
 
-                $http.post('/http', user, {
+                $http.post('/jx-login', user, {
                     responseType: 'json'
                 }).success(function(data, status, headers, config) {
                     if(data.length){

@@ -16,11 +16,12 @@ define([], function(){
                 }
             ).fail(
                 function(status){
-                    $scope.apply(function(){
-                        status
-                            ? $scope.loginForm.pwd.$setValidity('serverError', false)
-                            : $scope.loginForm.pwd.$setValidity('loginError', false);
-                    })
+                    if(status){
+                        console.log('status: ', status);
+                        $scope.loginForm.pwd.$setValidity('serverError', false)
+                    }else{
+                        $scope.loginForm.pwd.$setValidity('loginError', false);
+                    }
                 }
             )
         }
